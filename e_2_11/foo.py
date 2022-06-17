@@ -105,6 +105,13 @@ class GradientBandit(BanditAlgorithm):
 
         self.R_bar += (1/t) * (R - self.R_bar)
 
+class EpsilonGreedyCSS(EpsilonGreedy):
+    def __init__(self, epsilon) -> None:
+        super().__init__(epsilon)
+        self.alpha = 0.1
+    
+    def update(self, A, R, t):
+        self.Q[A] = self.Q[A] + self.alpha * (R - self.Q[A])
 
 
 # %%
